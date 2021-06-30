@@ -1,0 +1,74 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+@use "sass:meta";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$color-primary: #00A0D1;
+$color-accent: #FC9D03;
+$color-warn: #D4371C;
+$dark-color-secondary: #121212;
+$dark-font-color:#FFFFFF;
+$light-color-secondary: #FFFFFF;
+$light-font-color:#545454;
+.theme-light {
+  --color-primary: #{meta.inspect($color-primary)};
+  --color-accent: #{meta.inspect($color-accent)};
+  --color-warn: #{meta.inspect($color-warn)};
+  --color-secondary: #{meta.inspect($light-color-secondary)};
+  --font-color: #{meta.inspect($light-font-color)};
+
+}
+.theme-dark {
+  --color-primary: #{meta.inspect($color-primary)};
+  --color-accent: #{meta.inspect($color-accent)};
+  --color-warn: #{meta.inspect($color-warn)};
+  --color-secondary: #{meta.inspect($dark-color-secondary)};
+  --font-color: #{meta.inspect($dark-font-color)};
+}
+$mat-theme-primary : (
+  500: $color-primary,
+  contrast: (
+    500:$dark-font-color
+  )
+);
+$mat-theme-accent : (
+  500: $color-accent,
+  contrast: (
+    500:$dark-font-color
+  )
+);
+$mat-theme-warn : (
+  500: $color-warn,
+  contrast: (
+    500:$dark-font-color
+  )
+);
+$mat-light-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette($mat-theme-primary),
+    accent: mat.define-palette($mat-theme-accent),
+    warn: mat.define-palette($mat-theme-warn),
+  )
+));
+
+$mat-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette($mat-theme-primary),
+    accent: mat.define-palette($mat-theme-accent),
+    warn: mat.define-palette($mat-theme-warn),
+  )
+));
+
+@include mat.all-component-themes($mat-light-theme);
+.theme-light {
+  @include mat.all-component-themes($mat-light-theme);
+}
+.theme-dark{
+  @include mat.all-component-themes($mat-dark-theme);
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'select-theme';
+  theme = 'theme-dark';
+  changeTheme(event: MatSlideToggleChange ){
+    if (event.checked) {
+      this.theme = 'theme-light';
+    } else {
+      this.theme = 'theme-dark';
+    }
+  }
 }
